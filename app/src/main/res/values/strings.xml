@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">TP_Projeckt</string>
+    <string name="app_name">STUDNOTE</string>
+    <string name="toAuthorization">Авторизоваться</string>
+    <string name="toRegistration">Зарегестрироваться</string>
 </resources>
