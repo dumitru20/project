@@ -2,4 +2,12 @@
     <string name="app_name">STUDNOTE</string>
     <string name="toAuthorization">Авторизоваться</string>
     <string name="toRegistration">Зарегестрироваться</string>
+    <string name="authorization">Авторизация</string>
+    <string name="create_account">Создать аккаунт</string>
+    <string name="enter_login">Email</string>
+    <string name="enter_password">Пароль</string>
+    <string name="error_empty_field">Пожалуйста, введите данные</string>
+    <string name="error_validation">Некорректные данные</string>
+    <string name="unknown_exception">Неизвестная ошибка</string>
+    <string name="login_exist">Пользователь уже существует</string>
 </resources>
