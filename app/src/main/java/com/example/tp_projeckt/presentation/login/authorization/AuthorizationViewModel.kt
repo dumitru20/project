@@ -100,8 +100,7 @@ class AuthorizationViewModel(
 	}
 
 	fun openRegistration() {
-		TODO()
-		//router.openRegistration()
+		router.openRegistration()
 	}
 
 	fun back() {

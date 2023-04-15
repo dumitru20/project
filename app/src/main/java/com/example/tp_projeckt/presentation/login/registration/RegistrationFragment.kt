@@ -1,4 +1,4 @@
-package com.example.tp_projeckt.presentation.login.authorization
+package com.example.tp_projeckt.presentation.login.registration
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,50 +6,51 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.tp_projeckt.R
-import com.example.tp_projeckt.databinding.FragmentAuthorizationBinding
+import com.example.tp_projeckt.databinding.FragmentRegistrationBinding
 import com.example.tp_projeckt.presentation.login.ValidationResult
 import com.example.tp_projeckt.presentation.ui.ViewBindingHolder
 import com.example.tp_projeckt.presentation.ui.ViewBindingHolderImpl
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AuthorizationFragment : Fragment(), ViewBindingHolder<FragmentAuthorizationBinding> by ViewBindingHolderImpl() {
+class RegistrationFragment : Fragment(), ViewBindingHolder<FragmentRegistrationBinding> by ViewBindingHolderImpl() {
 
 	companion object {
 
-		fun newInstance() = AuthorizationFragment()
+		fun newInstance() = RegistrationFragment()
 	}
 
-	private val viewModel by viewModel<AuthorizationViewModel>()
+	private val viewModel by viewModel<RegistrationViewModel>()
 
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
 		savedInstanceState: Bundle?
-	): View = initBinding(FragmentAuthorizationBinding.inflate(inflater))
+	): View = initBinding(FragmentRegistrationBinding.inflate(inflater))
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
 		withBinding {
-			btnLogin.setOnClickListener {
-				viewModel.login(
-					textInputEditEmail.text.toString(),
-					textInputEditPassword.text.toString()
-				)
+
+			viewModel.state.observe(viewLifecycleOwner) { state ->
+				emailContainer.setError(state.emailResult)
+				passwordContainer.setError(state.passwordResult)
+				btnAuthorization.isEnabled = !state.registration
 			}
 
 			btnRegistration.setOnClickListener {
-				viewModel.openRegistration()
+				viewModel.registration(
+					textInputEditEmail.text.toString(),
+					textInputEditPassword.text.toString(),
+				)
 			}
 
 			toolbar.setNavigationOnClickListener {
 				viewModel.back()
 			}
 
-			viewModel.state.observe(viewLifecycleOwner) { state ->
-				emailContainer.setError(state.emailResult)
-				passwordContainer.setError(state.passwordResult)
-				btnLogin.isEnabled = !state.authorizing
+			btnAuthorization.setOnClickListener {
+				viewModel.openAuthorization()
 			}
 		}
 	}
@@ -67,19 +68,13 @@ class AuthorizationFragment : Fragment(), ViewBindingHolder<FragmentAuthorizatio
 				error = resources.getString(R.string.error_validation)
 			}
 
-			ValidationResult.LOGIN_EXIST              -> {
-				isErrorEnabled = true
-				error = resources.getString(R.string.login_exist_authorization)
-
-			}
-
 			ValidationResult.VALID                    -> {
 				isErrorEnabled = false
 			}
 
-			else                                      -> {
+			ValidationResult.LOGIN_EXIST              -> {
 				isErrorEnabled = true
-				error = resources.getString(R.string.unknown_exception)
+				error = resources.getString(R.string.login_exist_registration)
 			}
 		}
 	}
