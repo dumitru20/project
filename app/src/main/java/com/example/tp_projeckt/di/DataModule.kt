@@ -1,8 +1,19 @@
 package com.example.tp_projeckt.di
 
+import com.example.tp_projeckt.data.HeaderInterceptor
+import com.example.tp_projeckt.data.authorization.login.LoginApi
+import com.example.tp_projeckt.data.authorization.login.LoginDataSource
+import com.example.tp_projeckt.data.authorization.login.LoginDataSourceImpl
+import com.example.tp_projeckt.data.authorization.login.LoginRepositoryImpl
+import com.example.tp_projeckt.data.token.TokenDataSource
+import com.example.tp_projeckt.data.token.TokenDataSourceImpl
+import com.example.tp_projeckt.data.token.TokenDataStore
+import com.example.tp_projeckt.data.token.TokenDataStoreImpl
+import com.example.tp_projeckt.domain.login.authorization.LoginRepository
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -20,6 +31,10 @@ val dataModule = module {
             .build()
     }
 
+    single<Interceptor> {
+        HeaderInterceptor(tokenDataSource = get())
+    }
+
     single<OkHttpClient> {
         OkHttpClient.Builder()
             .addInterceptor(get())
@@ -32,5 +47,26 @@ val dataModule = module {
             .baseUrl(BASE_URL)
             .client(get())
             .build()
+    }
+
+    fun provideLoginApiService(retrofit: Retrofit) = retrofit.create(LoginApi::class.java)
+
+    single<LoginDataSource> {
+        LoginDataSourceImpl(provideLoginApiService(get()))
+    }
+
+    single<LoginRepository> {
+        LoginRepositoryImpl(
+            loginDataSource = get(),
+            tokenDataSource = get()
+        )
+    }
+
+    single<TokenDataStore> {
+        TokenDataStoreImpl(context = get())
+    }
+
+    single<TokenDataSource> {
+        TokenDataSourceImpl(dataStore = get())
     }
 }
