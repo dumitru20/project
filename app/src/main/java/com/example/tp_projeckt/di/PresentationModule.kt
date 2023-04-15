@@ -4,6 +4,8 @@ import com.example.tp_projeckt.presentation.title.TitleVIewModel
 import com.example.tp_projeckt.presentation.title.navigation.TitleRouter
 import com.example.tp_projeckt.presentation.login.authorization.AuthorizationViewModel
 import com.example.tp_projeckt.presentation.login.authorization.navigation.AuthorizationRouter
+import com.example.tp_projeckt.presentation.login.registration.RegistrationViewModel
+import com.example.tp_projeckt.presentation.login.registration.navigation.RegistrationRouter
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
@@ -23,9 +25,18 @@ val presentationModule = module {
 		)
 	}
 
+	viewModel<RegistrationViewModel> {
+		RegistrationViewModel(
+			registrationUseCase = get(),
+			router = get()
+		)
+	}
+
 	factory { TitleRouter(router = get()) }
 
 	factory { AuthorizationRouter(router = get()) }
+
+	factory { RegistrationRouter(router = get()) }
 
 	fun provideCicerone(): Cicerone<Router> =
 		Cicerone.create()

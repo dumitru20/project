@@ -9,5 +9,9 @@
     <string name="error_empty_field">Пожалуйста, введите данные</string>
     <string name="error_validation">Некорректные данные</string>
     <string name="unknown_exception">Неизвестная ошибка</string>
-    <string name="login_exist">Пользователь уже существует</string>
+    <string name="login_exist_authorization">Такого пользователя не существует</string>
+    <string name="login_exist_registration">Данная почта уже занята</string>
+    <string name="registration">Регистрация</string>
+    <string name="already_have_account">Уже есть аккаунт</string>
+    <string name="hint">Только буквы латинского алфавита</string>
 </resources>
