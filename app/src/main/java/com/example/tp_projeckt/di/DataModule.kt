@@ -5,11 +5,13 @@ import com.example.tp_projeckt.data.authorization.login.LoginApi
 import com.example.tp_projeckt.data.authorization.login.LoginDataSource
 import com.example.tp_projeckt.data.authorization.login.LoginDataSourceImpl
 import com.example.tp_projeckt.data.authorization.login.LoginRepositoryImpl
+import com.example.tp_projeckt.data.authorization.registration.*
 import com.example.tp_projeckt.data.token.TokenDataSource
 import com.example.tp_projeckt.data.token.TokenDataSourceImpl
 import com.example.tp_projeckt.data.token.TokenDataStore
 import com.example.tp_projeckt.data.token.TokenDataStoreImpl
 import com.example.tp_projeckt.domain.login.authorization.LoginRepository
+import com.example.tp_projeckt.domain.login.registration.RegistrationRepository
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -68,5 +70,22 @@ val dataModule = module {
 
     single<TokenDataSource> {
         TokenDataSourceImpl(dataStore = get())
+    }
+
+    fun provideRegistrationApiService(retrofit: Retrofit) = retrofit.create(RegistrationApi::class.java)
+
+    single<RegistrationDataSource> {
+        RegistrationDataSourceImpl(provideRegistrationApiService(get()))
+    }
+
+    single {
+        RegistrationCredentialsConverter()
+    }
+
+    single<RegistrationRepository> {
+        RegistrationRepositoryImpl(
+            registrationConverter = get(),
+            registrationDataSource = get()
+        )
     }
 }
