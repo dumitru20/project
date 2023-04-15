@@ -8,8 +8,7 @@ class TitleVIewModel(
 ) : ViewModel() {
 
 	fun openAuthorization() {
-		TODO()
-		//router.openAuthorization()
+		router.openAuthorization()
 	}
 
 	fun openRegistration() {
