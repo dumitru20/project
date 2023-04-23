@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.TP_Projeckt"
-        parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -15,5 +15,18 @@
             name="android:statusBarColor">?attr/colorPrimaryVariant
         </item>
         <!-- Customize your theme here. -->
+        <item name="floatingActionButtonStyle">@style/FloatingActionButtonStyle</item>
+    </style>
+
+    <style name="FloatingActionButtonStyle"
+        parent="Widget.Design.FloatingActionButton">
+        <item name="shapeAppearanceOverlay">@style/FabShapeStyle</item>
+        <item name="backgroundTint">@color/purple_500</item>
+    </style>
+
+    <style name="FabShapeStyle"
+        parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerSize">20%</item>
+        <item name="cornerFamily">rounded</item>
     </style>
 </resources>

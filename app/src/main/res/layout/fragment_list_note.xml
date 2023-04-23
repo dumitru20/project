@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@drawable/i_background"
+	tools:context="com.example.tp_projeckt.presentation.list_note.ListNoteFragment">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appBarDocuments"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		app:layout_insetEdge="top">
+
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			app:title="@string/app_name"
+			app:titleTextColor="@color/white"/>
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/documentRecyclerView"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="24dp"
+		app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+		app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+		tools:listitem="@layout/note_list_item"/>
+
+	<com.google.android.material.progressindicator.CircularProgressIndicator
+		android:id="@+id/progress"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:visibility="gone"
+		android:indeterminate="true"/>
+
+	<com.google.android.material.floatingactionbutton.FloatingActionButton
+		android:id="@+id/fab"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom|end"
+		android:layout_marginBottom="@dimen/spacing_16dp"
+		android:layout_marginEnd="@dimen/spacing_16dp"
+		app:layout_behavior="com.google.android.material.floatingactionbutton.FloatingActionButton$Behavior"
+		app:maxImageSize="@dimen/spacing_16dp"
+		app:srcCompat="@drawable/ic_add"
+		android:contentDescription="TODO" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
