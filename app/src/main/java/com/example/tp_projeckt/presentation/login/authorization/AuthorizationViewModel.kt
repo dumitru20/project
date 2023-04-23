@@ -88,8 +88,7 @@ class AuthorizationViewModel(
 		val error = authenticateUseCase(auth)
 
 		if (error.errorType.isNullOrEmpty()) {
-			TODO()
-			//router.openListNote()
+			router.openListNote()
 		} else {
 			_state.value = currentState.copy(
 				emailResult = ValidationResult.LOGIN_EXIST,
