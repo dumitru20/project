@@ -1,5 +1,7 @@
 package com.example.tp_projeckt.di
 
+import com.example.tp_projeckt.presentation.list_note.ListNoteViewModel
+import com.example.tp_projeckt.presentation.list_note.navigation.ListNoteRouter
 import com.example.tp_projeckt.presentation.title.TitleVIewModel
 import com.example.tp_projeckt.presentation.title.navigation.TitleRouter
 import com.example.tp_projeckt.presentation.login.authorization.AuthorizationViewModel
@@ -32,11 +34,20 @@ val presentationModule = module {
 		)
 	}
 
+	viewModel<ListNoteViewModel> {
+		ListNoteViewModel(
+			getNotesUseCase = get(),
+			router = get()
+		)
+	}
+
 	factory { TitleRouter(router = get()) }
 
 	factory { AuthorizationRouter(router = get()) }
 
 	factory { RegistrationRouter(router = get()) }
+
+	factory { ListNoteRouter(router = get()) }
 
 	fun provideCicerone(): Cicerone<Router> =
 		Cicerone.create()
