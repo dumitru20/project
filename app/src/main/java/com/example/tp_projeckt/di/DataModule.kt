@@ -6,10 +6,12 @@ import com.example.tp_projeckt.data.authorization.login.LoginDataSource
 import com.example.tp_projeckt.data.authorization.login.LoginDataSourceImpl
 import com.example.tp_projeckt.data.authorization.login.LoginRepositoryImpl
 import com.example.tp_projeckt.data.authorization.registration.*
+import com.example.tp_projeckt.data.list_note.*
 import com.example.tp_projeckt.data.token.TokenDataSource
 import com.example.tp_projeckt.data.token.TokenDataSourceImpl
 import com.example.tp_projeckt.data.token.TokenDataStore
 import com.example.tp_projeckt.data.token.TokenDataStoreImpl
+import com.example.tp_projeckt.domain.list_note.ListNoteRepository
 import com.example.tp_projeckt.domain.login.authorization.LoginRepository
 import com.example.tp_projeckt.domain.login.registration.RegistrationRepository
 import com.squareup.moshi.Moshi
@@ -86,6 +88,23 @@ val dataModule = module {
         RegistrationRepositoryImpl(
             registrationConverter = get(),
             registrationDataSource = get()
+        )
+    }
+
+    fun provideListNoteApiService(retrofit: Retrofit) = retrofit.create(ListNoteApi::class.java)
+
+    single<ListNoteDataSource> {
+        ListNoteDataSourceImpl(provideListNoteApiService(get()))
+    }
+
+    single {
+        ListNoteConverter()
+    }
+
+    single<ListNoteRepository> {
+        ListNoteRepositoryImpl(
+            listNoteConverter = get(),
+            listNoteDataSource = get()
         )
     }
 }
