@@ -1,13 +1,15 @@
 package com.example.tp_projeckt.di
 
-import com.example.tp_projeckt.presentation.list_note.ListNoteViewModel
-import com.example.tp_projeckt.presentation.list_note.navigation.ListNoteRouter
+import com.example.tp_projeckt.presentation.note.list.ListNoteViewModel
+import com.example.tp_projeckt.presentation.note.list.navigation.ListNoteRouter
 import com.example.tp_projeckt.presentation.title.TitleVIewModel
 import com.example.tp_projeckt.presentation.title.navigation.TitleRouter
 import com.example.tp_projeckt.presentation.login.authorization.AuthorizationViewModel
 import com.example.tp_projeckt.presentation.login.authorization.navigation.AuthorizationRouter
 import com.example.tp_projeckt.presentation.login.registration.RegistrationViewModel
 import com.example.tp_projeckt.presentation.login.registration.navigation.RegistrationRouter
+import com.example.tp_projeckt.presentation.note.create.CreateNoteViewModel
+import com.example.tp_projeckt.presentation.note.create.navigation.CreateNoteRouter
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
@@ -41,6 +43,13 @@ val presentationModule = module {
 		)
 	}
 
+	viewModel<CreateNoteViewModel> {
+		CreateNoteViewModel(
+			createNoteUseCase = get(),
+			router = get()
+		)
+	}
+
 	factory { TitleRouter(router = get()) }
 
 	factory { AuthorizationRouter(router = get()) }
@@ -48,6 +57,8 @@ val presentationModule = module {
 	factory { RegistrationRouter(router = get()) }
 
 	factory { ListNoteRouter(router = get()) }
+
+	factory { CreateNoteRouter(router = get()) }
 
 	fun provideCicerone(): Cicerone<Router> =
 		Cicerone.create()

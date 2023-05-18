@@ -1,19 +1,26 @@
 package com.example.tp_projeckt.di
 
 import com.example.tp_projeckt.data.HeaderInterceptor
-import com.example.tp_projeckt.data.authorization.login.LoginApi
-import com.example.tp_projeckt.data.authorization.login.LoginDataSource
-import com.example.tp_projeckt.data.authorization.login.LoginDataSourceImpl
-import com.example.tp_projeckt.data.authorization.login.LoginRepositoryImpl
-import com.example.tp_projeckt.data.authorization.registration.*
-import com.example.tp_projeckt.data.list_note.*
+import com.example.tp_projeckt.data.login.authorization.LoginApi
+import com.example.tp_projeckt.data.login.authorization.LoginDataSource
+import com.example.tp_projeckt.data.login.authorization.LoginDataSourceImpl
+import com.example.tp_projeckt.data.login.authorization.LoginRepositoryImpl
+import com.example.tp_projeckt.data.login.registration.*
+import com.example.tp_projeckt.data.note.GetNotesConverter
+import com.example.tp_projeckt.data.note.NoteConverter
+import com.example.tp_projeckt.data.note.create.CreateNoteApi
+import com.example.tp_projeckt.data.note.create.CreateNoteDataSource
+import com.example.tp_projeckt.data.note.create.CreateNoteDataSourceImpl
+import com.example.tp_projeckt.data.note.create.CreateNoteRepositoryImpl
+import com.example.tp_projeckt.data.note.list.*
 import com.example.tp_projeckt.data.token.TokenDataSource
 import com.example.tp_projeckt.data.token.TokenDataSourceImpl
 import com.example.tp_projeckt.data.token.TokenDataStore
 import com.example.tp_projeckt.data.token.TokenDataStoreImpl
-import com.example.tp_projeckt.domain.list_note.ListNoteRepository
+import com.example.tp_projeckt.domain.note.list.ListNoteRepository
 import com.example.tp_projeckt.domain.login.authorization.LoginRepository
 import com.example.tp_projeckt.domain.login.registration.RegistrationRepository
+import com.example.tp_projeckt.domain.note.create.CreateNoteRepository
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -98,13 +105,30 @@ val dataModule = module {
     }
 
     single {
-        ListNoteConverter()
+        GetNotesConverter()
     }
 
     single<ListNoteRepository> {
         ListNoteRepositoryImpl(
-            listNoteConverter = get(),
+            getNotesConverter = get(),
             listNoteDataSource = get()
+        )
+    }
+
+    fun provideCreateNoteApiService(retrofit: Retrofit) = retrofit.create(CreateNoteApi::class.java)
+
+    single<CreateNoteDataSource> {
+        CreateNoteDataSourceImpl(provideCreateNoteApiService(get()))
+    }
+
+    single {
+        NoteConverter()
+    }
+
+    single<CreateNoteRepository> {
+        CreateNoteRepositoryImpl(
+            createNoteDataSource = get(),
+            converter = get()
         )
     }
 }
