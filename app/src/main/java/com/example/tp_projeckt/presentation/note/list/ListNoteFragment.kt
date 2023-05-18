@@ -10,8 +10,8 @@ import com.example.tp_projeckt.R
 import com.example.tp_projeckt.databinding.FragmentListNoteBinding
 import com.example.tp_projeckt.domain.Note
 import com.example.tp_projeckt.presentation.common.ItemMarginDecoration
-import com.example.tp_projeckt.presentation.ui.ViewBindingHolder
-import com.example.tp_projeckt.presentation.ui.ViewBindingHolderImpl
+import com.example.tp_projeckt.presentation.common.ui.ViewBindingHolder
+import com.example.tp_projeckt.presentation.common.ui.ViewBindingHolderImpl
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListNoteFragment : Fragment(), ViewBindingHolder<FragmentListNoteBinding> by ViewBindingHolderImpl() {
@@ -70,7 +70,7 @@ class ListNoteFragment : Fragment(), ViewBindingHolder<FragmentListNoteBinding> 
 	}
 
 	private fun initRecyclerView() {
-		listNoteAdapter = ListNoteAdapter { viewModel.openEditNote(it.id, it.title) }
+		listNoteAdapter = ListNoteAdapter { viewModel.openEditNote(it.id) }
 
 		binding.documentRecyclerView.run {
 			adapter = listNoteAdapter

@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import com.example.tp_projeckt.R
 import com.example.tp_projeckt.databinding.FragmentRegistrationBinding
 import com.example.tp_projeckt.presentation.login.ValidationResult
-import com.example.tp_projeckt.presentation.ui.ViewBindingHolder
-import com.example.tp_projeckt.presentation.ui.ViewBindingHolderImpl
+import com.example.tp_projeckt.presentation.common.ui.ViewBindingHolder
+import com.example.tp_projeckt.presentation.common.ui.ViewBindingHolderImpl
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

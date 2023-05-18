@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.tp_projeckt.R
 import com.example.tp_projeckt.databinding.FragmentCreateNoteBinding
-import com.example.tp_projeckt.presentation.ui.ViewBindingHolder
-import com.example.tp_projeckt.presentation.ui.ViewBindingHolderImpl
+import com.example.tp_projeckt.presentation.common.ui.ViewBindingHolder
+import com.example.tp_projeckt.presentation.common.ui.ViewBindingHolderImpl
 import com.example.tp_projeckt.util.extensions.showAlertDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

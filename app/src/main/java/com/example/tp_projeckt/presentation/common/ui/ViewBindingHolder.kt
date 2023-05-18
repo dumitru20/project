@@ -1,4 +1,4 @@
-package com.example.tp_projeckt.presentation.ui
+package com.example.tp_projeckt.presentation.common.ui
 
 import android.view.View
 import androidx.fragment.app.Fragment
