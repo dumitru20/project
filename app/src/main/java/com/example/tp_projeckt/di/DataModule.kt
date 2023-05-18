@@ -31,7 +31,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.*
 
-private const val BASE_URL = "http://192.168.0.104:8080"
+private const val BASE_URL = "http://192.168.96.1:8080"
 
 val dataModule = module {
 

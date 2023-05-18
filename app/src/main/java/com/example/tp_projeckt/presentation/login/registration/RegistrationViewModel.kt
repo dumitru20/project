@@ -95,7 +95,7 @@ class RegistrationViewModel(
 
 		val error = registrationUseCase(registrationCredentials)
 
-		if (error.errorType.isNullOrEmpty()) {
+		if (!error.errorType.isNullOrEmpty()) {
 			_state.value = currentState.copy(
 				emailResult = ValidationResult.LOGIN_EXIST,
 				passwordResult = ValidationResult.VALID,
