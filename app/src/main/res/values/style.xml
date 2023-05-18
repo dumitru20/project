@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextInputLayout"
+        parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+        <item name="android:paddingStart">@dimen/spacing_8dp</item>
+        <item name="android:paddingTop">@dimen/spacing_8dp</item>
+        <item name="android:background">@drawable/ic_rectangle_8</item>
+    </style>
+
+    <style name="AlertDialog.Save" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/grey</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/MyDialogButtonSaveStyle</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/MyDialogButtonCancelStyle</item>
+    </style>
+
+    <style name="MyDialogButtonSaveStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/green</item>
+    </style>
+
+    <style name="MyDialogButtonCancelStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/purple_500</item>
+    </style>
+</resources>
