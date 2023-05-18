@@ -10,45 +10,27 @@ import com.example.tp_projeckt.presentation.login.registration.RegistrationViewM
 import com.example.tp_projeckt.presentation.login.registration.navigation.RegistrationRouter
 import com.example.tp_projeckt.presentation.note.create.CreateNoteViewModel
 import com.example.tp_projeckt.presentation.note.create.navigation.CreateNoteRouter
+import com.example.tp_projeckt.presentation.note.edit.navigation.EditNoteRouter
+import com.example.tp_projeckt.presentation.note.edit.EditNoteViewModel
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
-import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 
 val presentationModule = module {
 
-	viewModel<TitleVIewModel> {
-		TitleVIewModel(router = get())
-	}
+	viewModelOf(::TitleVIewModel)
 
-	viewModel<AuthorizationViewModel> {
-		AuthorizationViewModel(
-			authenticateUseCase = get(),
-			router = get()
-		)
-	}
+	viewModelOf(::AuthorizationViewModel)
 
-	viewModel<RegistrationViewModel> {
-		RegistrationViewModel(
-			registrationUseCase = get(),
-			router = get()
-		)
-	}
+	viewModelOf(::RegistrationViewModel)
 
-	viewModel<ListNoteViewModel> {
-		ListNoteViewModel(
-			getNotesUseCase = get(),
-			router = get()
-		)
-	}
+	viewModelOf(::ListNoteViewModel)
 
-	viewModel<CreateNoteViewModel> {
-		CreateNoteViewModel(
-			createNoteUseCase = get(),
-			router = get()
-		)
-	}
+	viewModelOf(::CreateNoteViewModel)
+
+	viewModelOf(::EditNoteViewModel)
 
 	factory { TitleRouter(router = get()) }
 
@@ -59,6 +41,8 @@ val presentationModule = module {
 	factory { ListNoteRouter(router = get()) }
 
 	factory { CreateNoteRouter(router = get()) }
+
+	factory { EditNoteRouter(router = get()) }
 
 	fun provideCicerone(): Cicerone<Router> =
 		Cicerone.create()

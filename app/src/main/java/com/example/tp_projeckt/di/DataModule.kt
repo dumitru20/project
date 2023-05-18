@@ -12,6 +12,10 @@ import com.example.tp_projeckt.data.note.create.CreateNoteApi
 import com.example.tp_projeckt.data.note.create.CreateNoteDataSource
 import com.example.tp_projeckt.data.note.create.CreateNoteDataSourceImpl
 import com.example.tp_projeckt.data.note.create.CreateNoteRepositoryImpl
+import com.example.tp_projeckt.data.note.edit.NoteApi
+import com.example.tp_projeckt.data.note.edit.NoteDataSource
+import com.example.tp_projeckt.data.note.edit.NoteDataSourceImpl
+import com.example.tp_projeckt.data.note.edit.NoteRepositoryImpl
 import com.example.tp_projeckt.data.note.list.*
 import com.example.tp_projeckt.data.token.TokenDataSource
 import com.example.tp_projeckt.data.token.TokenDataSourceImpl
@@ -21,6 +25,7 @@ import com.example.tp_projeckt.domain.note.list.ListNoteRepository
 import com.example.tp_projeckt.domain.login.authorization.LoginRepository
 import com.example.tp_projeckt.domain.login.registration.RegistrationRepository
 import com.example.tp_projeckt.domain.note.create.CreateNoteRepository
+import com.example.tp_projeckt.domain.note.edit.NoteRepository
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -129,6 +134,20 @@ val dataModule = module {
         CreateNoteRepositoryImpl(
             createNoteDataSource = get(),
             converter = get()
+        )
+    }
+
+    fun provideNoteApiService(retrofit: Retrofit) = retrofit.create(NoteApi::class.java)
+
+    single<NoteDataSource> {
+        NoteDataSourceImpl(provideNoteApiService(get()))
+    }
+
+    single<NoteRepository> {
+        NoteRepositoryImpl(
+            noteDataSource = get(),
+            converterNote = get(),
+            getNotesConverter = get()
         )
     }
 }
