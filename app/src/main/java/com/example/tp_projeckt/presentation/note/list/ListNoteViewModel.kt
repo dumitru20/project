@@ -39,4 +39,8 @@ class ListNoteViewModel(
 	fun openEditNote(id: Int) {
 		router.openEditNote(id)
 	}
+
+	fun openTitle() {
+		router.openTitle()
+	}
 }
