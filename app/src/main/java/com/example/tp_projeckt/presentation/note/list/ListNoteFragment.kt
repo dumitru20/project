@@ -47,6 +47,8 @@ class ListNoteFragment : Fragment(), ViewBindingHolder<FragmentListNoteBinding> 
 			viewModel.openNewNote()
 		}
 
+		initToolbar()
+
 		initRecyclerView()
 	}
 
@@ -75,6 +77,23 @@ class ListNoteFragment : Fragment(), ViewBindingHolder<FragmentListNoteBinding> 
 		binding.documentRecyclerView.run {
 			adapter = listNoteAdapter
 			addItemDecoration(ItemMarginDecoration(R.dimen.spacing_8dp))
+		}
+	}
+
+	private fun initToolbar() {
+		withBinding {
+			toolbar.setOnMenuItemClickListener {
+				when (it.itemId) {
+					R.id.actionExit -> {
+						viewModel.openTitle()
+						true
+					}
+
+					else            -> {
+						false
+					}
+				}
+			}
 		}
 	}
 
