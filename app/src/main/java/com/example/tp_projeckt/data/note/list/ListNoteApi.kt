@@ -5,6 +5,6 @@ import retrofit2.http.GET
 
 interface ListNoteApi {
 
-	@GET
+	@GET("/api/notes")
 	suspend fun get(): List<NoteModel>
 }

@@ -17,6 +17,8 @@ class HeaderInterceptor(
 
 		val request: Request = original.newBuilder()
 			.header("authorization","Bearer $token")
+			.header("content-type","application/json")
+			.header("accept","application/json")
 			.build()
 		chain.proceed(request)
 	}

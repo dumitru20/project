@@ -6,6 +6,6 @@ import retrofit2.http.POST
 
 interface CreateNoteApi {
 
-	@POST("/note")
+	@POST("/api/note")
 	suspend fun create(@Body note: NoteModel)
 }
