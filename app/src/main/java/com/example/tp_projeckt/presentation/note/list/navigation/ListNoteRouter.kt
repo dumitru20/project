@@ -5,7 +5,7 @@ import com.github.terrakok.cicerone.Router
 
 class ListNoteRouter(private val router: Router) {
 
-	fun openEditNote(id: Int, title: String) {
+	fun openEditNote(id: Int) {
 		//TODO добавить переход на заметку
 	}
 
